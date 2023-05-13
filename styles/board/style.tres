@@ -1,0 +1,20 @@
+[gd_resource type="Theme" load_steps=5 format=3]
+
+[ext_resource type="FontFile" uid="uid://dowdsty4lsp7v" path="res://Chainbox.otf" id="1_ro7ks"]
+[ext_resource type="StyleBox" uid="uid://iw15xoba7x0i" path="res://styles/board/button hover.tres" id="2_coc72"]
+[ext_resource type="StyleBox" uid="uid://b1l0427x3d5v" path="res://styles/board/button normal.tres" id="3_ahoph"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_81ks7"]
+
+[resource]
+Button/colors/font_color = Color(0, 0, 0, 1)
+Button/colors/font_focus_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_color = Color(0, 0, 0, 1)
+Button/colors/font_hover_pressed_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(0, 0, 0, 1)
+Button/font_sizes/font_size = 72
+Button/fonts/font = ExtResource("1_ro7ks")
+Button/styles/focus = SubResource("StyleBoxEmpty_81ks7")
+Button/styles/hover = ExtResource("2_coc72")
+Button/styles/normal = ExtResource("3_ahoph")
+Button/styles/pressed = ExtResource("2_coc72")

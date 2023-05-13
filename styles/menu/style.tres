@@ -1,0 +1,27 @@
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://chpuitaonrjxa"]
+
+[ext_resource type="StyleBox" uid="uid://jauhksx442dv" path="res://styles/menu/button hover.tres" id="1_iqmcq"]
+[ext_resource type="StyleBox" uid="uid://beqay6bukat7b" path="res://styles/menu/button default.tres" id="2_hk7wn"]
+[ext_resource type="StyleBox" uid="uid://d3p104fgjs4ap" path="res://styles/menu/button pressed.tres" id="3_np0mm"]
+[ext_resource type="StyleBox" uid="uid://8inq86nb1jh1" path="res://styles/menu/panel.tres" id="4_58csr"]
+[ext_resource type="StyleBox" uid="uid://b2q71j5tfmr7f" path="res://styles/menu/linedit normal.tres" id="4_bf0g0"]
+[ext_resource type="StyleBox" uid="uid://sem71s6indct" path="res://styles/menu/linedit disabled.tres" id="5_nrk02"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gtk70"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_78u4c"]
+
+[resource]
+Button/font_sizes/font_size = 32
+Button/styles/focus = SubResource("StyleBoxEmpty_gtk70")
+Button/styles/hover = ExtResource("1_iqmcq")
+Button/styles/normal = ExtResource("2_hk7wn")
+Button/styles/pressed = ExtResource("3_np0mm")
+LineEdit/font_sizes/font_size = 22
+LineEdit/styles/focus = SubResource("StyleBoxEmpty_78u4c")
+LineEdit/styles/normal = ExtResource("4_bf0g0")
+LineEdit/styles/read_only = ExtResource("5_nrk02")
+MarginContainer/constants/margin_left = 75
+MarginContainer/constants/margin_right = 75
+MarginContainer/constants/margin_top = 32
+PanelContainer/styles/panel = ExtResource("4_58csr")

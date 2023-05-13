@@ -1,0 +1,174 @@
+[gd_scene load_steps=8 format=3 uid="uid://b0xbaen5osprp"]
+
+[ext_resource type="Script" path="res://app.gd" id="1_augtv"]
+[ext_resource type="Script" path="res://RBoxContainer.gd" id="2_8o33u"]
+[ext_resource type="Theme" path="res://styles/board/style.tres" id="3_4q7cn"]
+[ext_resource type="Script" path="res://Board.gd" id="4_i5v3k"]
+[ext_resource type="Theme" uid="uid://chpuitaonrjxa" path="res://styles/menu/style.tres" id="5_qoxus"]
+[ext_resource type="FontFile" uid="uid://dowdsty4lsp7v" path="res://Chainbox.otf" id="6_orrbk"]
+[ext_resource type="Script" path="res://Scramble.gd" id="7_qucos"]
+
+[node name="App" type="Control" node_paths=PackedStringArray("resetButton", "winnerLabel", "boardGrid")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_augtv")
+resetButton = NodePath("BoxContainer/PanelContainer/CenterContainer/VBoxContainer/Reset")
+winnerLabel = NodePath("BoxContainer/PanelContainer/CenterContainer/VBoxContainer/WinnerLabel")
+boardGrid = NodePath("BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board")
+
+[node name="BoxContainer" type="BoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_8o33u")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+size_flags_stretch_ratio = 3.0
+
+[node name="PanelContainer" type="PanelContainer" parent="BoxContainer/AspectRatioContainer"]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="BoxContainer/AspectRatioContainer/PanelContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Board" type="GridContainer" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_4q7cn")
+columns = 3
+script = ExtResource("4_i5v3k")
+
+[node name="Button#1" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "1"
+clip_text = true
+
+[node name="Button#2" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "2"
+clip_text = true
+
+[node name="Button#3" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "3"
+clip_text = true
+
+[node name="Button#8" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "8"
+clip_text = true
+
+[node name="Empty" type="Control" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+
+[node name="Button#4" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "4
+"
+clip_text = true
+
+[node name="Button#7" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "7
+"
+clip_text = true
+
+[node name="Button#6" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "6
+"
+clip_text = true
+
+[node name="Button#5" type="Button" parent="BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "5"
+clip_text = true
+
+[node name="PanelContainer" type="PanelContainer" parent="BoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme = ExtResource("5_qoxus")
+
+[node name="CenterContainer" type="CenterContainer" parent="BoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BoxContainer/PanelContainer/CenterContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 3
+theme_override_constants/shadow_outline_size = 10
+theme_override_fonts/font = ExtResource("6_orrbk")
+theme_override_font_sizes/font_size = 86
+text = "8-Puzzle"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Reset" type="Button" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+text = "Reset"
+
+[node name="Scramble" type="Button" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer" node_paths=PackedStringArray("scrambleCounter")]
+layout_mode = 2
+text = "Scramble"
+script = ExtResource("7_qucos")
+scrambleCounter = NodePath("../HBoxContainer/ScrambleCounter")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+text = "Scramble Loops
+"
+
+[node name="VSeparator" type="VSeparator" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="ScrambleCounter" type="LineEdit" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "6"
+placeholder_text = "loops"
+alignment = 1
+
+[node name="WinnerLabel" type="Label" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 42
+text = "Winner ♔"
+horizontal_alignment = 1
+uppercase = true
