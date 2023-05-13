@@ -33,7 +33,7 @@ func set_board(table: Array):
 		child.queue_free();
 	tableSize=table.size();
 	for i in range(tableSize):
-		if typeof(table[i]) == TYPE_STRING:
+		if table[i] == 0:
 			add_child(Control.new());
 			emptyIndex = i;
 			#print("empty " + str(empty))
