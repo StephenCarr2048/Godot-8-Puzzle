@@ -10,9 +10,11 @@ const _neighborOffsets:= [
 
 #(1,1) vector to int: 1+3*1=4
 var emptyIndex:= 4;
+#cashing between setBoards
+var tableSize:= 9;
 
-func vector_to_index(table: Array, positionVector: Vector2i) -> int:
-	return positionVector.x + positionVector.y*int(sqrt(table.size()))
+func vector_to_index(positionVector: Vector2i) -> int:
+	return positionVector.x + positionVector.y*int(sqrt(tableSize))
 	#see the conversion of 2d to 1d through x+y*3
 		#[	0,	1,	2,
 		#	3,	4,	5,
@@ -29,7 +31,8 @@ func set_board(table: Array):
 	for child in get_children():
 		remove_child(child);
 		child.queue_free();
-	for i in range(table.size()):
+	tableSize=table.size();
+	for i in range(tableSize):
 		if typeof(table[i]) == TYPE_STRING:
 			add_child(Control.new());
 			emptyIndex = i;
@@ -45,10 +48,10 @@ func find_board_neighbors(table: Array) -> Array:
 	var neighbor: int;
 	var buttonsInRange := [];
 	for offset in _neighborOffsets:
-		neighbor = emptyIndex+vector_to_index(table, offset);
+		neighbor = emptyIndex+vector_to_index(offset);
 		if (neighbor > -1				and
-			neighbor < table.size()		and
-			_sharing_row_xor_col(emptyIndex, neighbor, table.size())):
+			neighbor < tableSize		and
+			_sharing_row_xor_col(emptyIndex, neighbor, tableSize)):
 				print("index: "+ str(neighbor));
 				buttonsInRange.append(get_child(neighbor) as Button);
 	return buttonsInRange;
