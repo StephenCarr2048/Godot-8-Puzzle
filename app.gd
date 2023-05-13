@@ -1,6 +1,7 @@
 extends Control
 
 @export var resetButton: Button;
+@export var undoButton: Button;
 @export var winnerLabel: Label;
 @export var boardGrid: GridContainer;
 
@@ -18,6 +19,7 @@ var currentHistory: Array:
 func _ready():
 	reset();
 	resetButton.pressed.connect(reset);
+	undoButton.pressed.connect(undo);
 	#check_win();
 
 
@@ -34,13 +36,21 @@ func reset():
 	#for button in boardGrid.find_board_neighbors(currentHistory):
 	#	print(int(button.text));
 		
-	
 func handle_history(nextSquares:Array):
-	nextSquares.append(history);
+	history.push_back(nextSquares);
+
+func undo():
+	print(history.size())
+	if history.size()>1:
+		print("inside undo")
+		history.pop_back();
+		boardGrid.set_board(currentHistory);
+		print(currentHistory);
+		_connect_neighbors();
 
 func _match_arrays(arr1: Array, arr2: Array) -> bool:
 	for i in range(arr1.size()):
-		if arr1[i] != arr2[i]:
+		if int(arr1[i]) != int(arr2[i]):
 			return false;
 	return true;
 

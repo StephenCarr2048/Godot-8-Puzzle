@@ -8,7 +8,7 @@
 [ext_resource type="FontFile" uid="uid://dowdsty4lsp7v" path="res://Chainbox.otf" id="6_orrbk"]
 [ext_resource type="Script" path="res://Scramble.gd" id="7_qucos"]
 
-[node name="App" type="Control" node_paths=PackedStringArray("resetButton", "winnerLabel", "boardGrid")]
+[node name="App" type="Control" node_paths=PackedStringArray("resetButton", "undoButton", "winnerLabel", "boardGrid")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -16,7 +16,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_augtv")
-resetButton = NodePath("BoxContainer/PanelContainer/CenterContainer/VBoxContainer/Reset")
+resetButton = NodePath("BoxContainer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/Reset")
+undoButton = NodePath("BoxContainer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2/Undo")
 winnerLabel = NodePath("BoxContainer/PanelContainer/CenterContainer/VBoxContainer/WinnerLabel")
 boardGrid = NodePath("BoxContainer/AspectRatioContainer/PanelContainer/MarginContainer/Board")
 
@@ -137,9 +138,24 @@ text = "8-Puzzle"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Reset" type="Button" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
+[node name="HBoxContainer2" type="HBoxContainer" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer"]
 layout_mode = 2
+
+[node name="Reset" type="Button" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Reset"
+
+[node name="Undo" type="Button" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0, 0, 0, 1)
+theme_override_colors/font_focus_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+text = "↺"
 
 [node name="Scramble" type="Button" parent="BoxContainer/PanelContainer/CenterContainer/VBoxContainer" node_paths=PackedStringArray("scrambleCounter")]
 layout_mode = 2
