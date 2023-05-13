@@ -15,6 +15,9 @@ var currentHistory: Array:
 	set(value):
 		return;
 
+#TODO remove if you can find a way to remove callable inside itself
+var _neighbor_mask: int;
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	reset();
@@ -32,12 +35,16 @@ func reset():
 	history= [SOLUTION];
 	boardGrid.set_board(currentHistory);
 	print(currentHistory);
+	#	TODO remove if you can find a way to remove callable inside itself
+	for button in boardGrid.get_children():
+		if(button is Button):
+			(button as Button).pressed.connect(exchange_clicked.bind(button));
 	_connect_neighbors();
 	#for button in boardGrid.find_board_neighbors(currentHistory):
 	#	print(int(button.text));
 		
 func handle_history(nextSquares:Array):
-	history.push_back(nextSquares);
+	history.append(nextSquares);
 
 func undo():
 	print(history.size())
@@ -61,8 +68,11 @@ func check_win():
 	print("winner!")
 	
 func _connect_neighbors():
+	_neighbor_mask=0;
 	for button in boardGrid.find_board_neighbors(currentHistory):
-		(button as Button).pressed.connect(exchange_clicked.bind(button));
+	#	TODO remove if you can find a way to remove callable inside itself
+		_neighbor_mask+=1<<(button as Node).get_index();
+	#	(button as Button).pressed.connect(exchange_clicked.bind(button));
 
 func _exchange_template(index: int) -> Array:
 	var newSquares = SOLUTION.duplicate()
@@ -72,12 +82,15 @@ func _exchange_template(index: int) -> Array:
 	return newSquares;
 
 func exchange_clicked(button: Button):
-	var index = button.get_index();
-	button.pressed.disconnect(exchange_clicked);
-	boardGrid.slide_on_board(currentHistory, index);
-	handle_history(_exchange_template(index));
-	check_win();
-	_connect_neighbors();
+	#	TODO remove if you can find a way to remove callable inside itself
+	if((1<<button.get_index()&_neighbor_mask)):
+		var index = button.get_index();
+		#print(button.pressed.get_connections()[0]["callable"])
+		#button.pressed.disconnect(button.pressed.get_connections()[0]["callable"]);
+		boardGrid.slide_on_board(currentHistory, index);
+		handle_history(_exchange_template(index));
+		check_win();
+		_connect_neighbors();
 
 func exchange_scrambled():
 	var neighbors:= boardGrid.find_board_neighbors(currentHistory) as Array;
