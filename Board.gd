@@ -56,4 +56,7 @@ func find_board_neighbors(table: Array) -> Array:
 func slide_on_board(table: Array, clickedIndex: int):
 	var control=get_child(emptyIndex);
 	var button=get_child(clickedIndex);
+	move_child(button, emptyIndex)
+	if(abs(emptyIndex-clickedIndex)>1):
+		move_child(control, clickedIndex)
 	emptyIndex = clickedIndex;

@@ -4,8 +4,8 @@ extends Control
 @export var winnerLabel: Label;
 @export var boardGrid: GridContainer;
 
-const SOLUTION := [	1,"",3,
-					8, 2,4,
+const SOLUTION := [	1, 2,3,
+					8,"",4,
 					7, 6,5];
 var history: Array;
 var currentHistory: Array:
@@ -18,7 +18,7 @@ var currentHistory: Array:
 func _ready():
 	reset();
 	resetButton.pressed.connect(reset);
-	#boardGrid.slide_on_board(currentHistory, 3);
+	boardGrid.slide_on_board(currentHistory, 7);
 	#check_win();
 
 
