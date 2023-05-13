@@ -16,8 +16,9 @@ var currentHistory: Array:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	reset_board();
-	resetButton.pressed.connect(reset_board);
+	reset();
+	resetButton.pressed.connect(reset);
+	boardGrid.slide_on_board(currentHistory, 3);
 	#check_win();
 
 
@@ -25,7 +26,7 @@ func _ready():
 func _process(delta):
 	pass
 	
-func reset_board():
+func reset():
 	history= [SOLUTION];
 	boardGrid.set_board(currentHistory);
 	for button in boardGrid.find_board_neighbors(currentHistory):

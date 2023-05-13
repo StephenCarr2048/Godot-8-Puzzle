@@ -18,7 +18,6 @@ func _process(delta):
 func _draw():
 	#viewsize variable is kept in memory between loops
 	_viewSize = view.get_visible_rect().size;
-	
 	#	switch_orientation();
 	if _viewSize.y>_viewSize.x:
 		vertical = true;

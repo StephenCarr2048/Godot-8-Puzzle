@@ -8,6 +8,7 @@ const _neighborOffsets:= [
 				Vector2i(0,1)
 ]
 
+#(1,1) vector to int: 1+3*1=4
 var emptyIndex:= 4;
 
 func vector_to_index(table: Array, positionVector: Vector2i) -> int:
@@ -34,25 +35,17 @@ func set_board(table: Array):
 
 func find_board_neighbors(table: Array) -> Array:
 	var neighbor: int;
-	var gridChildren:= get_children();
 	var buttonsInRange := [];
 	for offset in _neighborOffsets:
 		neighbor = emptyIndex+vector_to_index(table, offset);
 		if neighbor > -1 && neighbor < table.size():
 			print("index: "+ str(neighbor));
-			#buttonsInRange.append(gridChildren[neighbor] as Button);
+			buttonsInRange.append(get_child(neighbor) as Button);
 	return buttonsInRange;
 
 func slide_on_board(table: Array, clickedIndex: int):
-	#move_child(get_child(clickedIndex), emptyIndex);
-	#if(abs(clickedIndex-emptyIndex)>1):
-	#	emptyIndex+=sign(clickedIndex-emptyIndex);
-	#	move_child(get_child(emptyIndex), clickedIndex);
-	var children := get_children();
-	#var control := children[emptyIndex];
-	#get_child(emptyIndex).replace_by(children[clickedIndex]);
-	#get_child(clickedIndex).replace_by(control);
-	move_child(children[emptyIndex], clickedIndex);
-	if(abs(emptyIndex-clickedIndex)>1):
-		move_child(children[clickedIndex], emptyIndex);
+	var control=get_child(emptyIndex);
+	var button=get_child(clickedIndex);
+	remove_child(button);
+	
 	emptyIndex = clickedIndex;
