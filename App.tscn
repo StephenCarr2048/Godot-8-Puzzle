@@ -172,3 +172,4 @@ theme_override_font_sizes/font_size = 42
 text = "Winner ♔"
 horizontal_alignment = 1
 uppercase = true
+lines_skipped = 1
