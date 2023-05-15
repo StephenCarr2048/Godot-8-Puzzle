@@ -137,7 +137,7 @@ func exchange_scrambled():
 		if history.size()>2:
 			if (_match_arrays(currentHistory,history[-3])):
 				loop-=2;
-				history= history.slice(0, -2);
+				print("pruned stalled move in scramble")
 		_connect_neighbors();
 	winnerLabel.text=" ";
 	history = [currentHistory];
