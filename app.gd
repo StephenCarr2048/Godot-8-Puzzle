@@ -2,6 +2,7 @@ extends Control
 
 @export var resetButton: Button;
 @export var undoButton: Button;
+@export var scrambleButton: Button;
 @export var winnerLabel: Label;
 @export var boardGrid: GridContainer;
 
@@ -26,9 +27,7 @@ func _ready():
 	reset();
 	resetButton.pressed.connect(reset);
 	undoButton.pressed.connect(undo);
-	
-	#exchange_scrambled()
-
+	scrambleButton.pressed.connect(exchange_scrambled);
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -123,7 +122,7 @@ func exchange_scrambled():
 	var repeatedMove: bool;
 	#for n in neighbors:
 	#	(n as Button).pressed.disconnect(exchange_clicked);
-	for loop in range(6): #	TODO scramble counter as upper range
+	for loop in range(scrambleButton.get_scramble_loops()): #	TODO scramble counter as upper range
 		neighbors = boardGrid.find_board_neighbors(currentHistory);
 		index = randi()%neighbors.size();
 		exchange_clicked(neighbors[index]);		#TODO replace with code that doesn't update history or redraw
@@ -134,4 +133,5 @@ func exchange_scrambled():
 				loop-=2;
 				history= history.slice(0, -2);
 		_connect_neighbors();
+	winnerLabel.text=" ";
 	history = [currentHistory];
