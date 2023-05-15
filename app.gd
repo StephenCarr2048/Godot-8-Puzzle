@@ -31,7 +31,9 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	pass
+	#if(Input.is_action_just_pressed("ui_undo")):
+	#	undo();
+	pass;
 
 func _input(event):
 	inputX= int(event.is_action_pressed("ui_left"))-int(event.is_action_pressed("ui_right"));
@@ -48,6 +50,10 @@ func _input(event):
 		child = boardGrid.get_child(boardGrid.vector_to_index(Vector2i(0,inputY))+boardGrid.emptyIndex);
 		if child in neighbors:
 			exchange_clicked(child);
+	if(event.is_action_pressed("ui_undo")):
+		undo();
+	if(event.is_action_pressed("ui_reload")):
+		reset();
 func reset():
 	winnerLabel.text=" ";
 	#winnerLabel.lines_skipped = 1;
