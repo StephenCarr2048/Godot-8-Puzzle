@@ -26,6 +26,8 @@ func _ready():
 	reset();
 	resetButton.pressed.connect(reset);
 	undoButton.pressed.connect(undo);
+	
+	#exchange_scrambled()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -130,5 +132,6 @@ func exchange_scrambled():
 		if history.size()>2:
 			if (_match_arrays(currentHistory,history[-3])):
 				loop-=2;
-				history= history.slice(0, -2)
+				history= history.slice(0, -2);
 		_connect_neighbors();
+	history = [currentHistory];
