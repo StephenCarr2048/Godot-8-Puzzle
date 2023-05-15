@@ -26,7 +26,6 @@ func _ready():
 	reset();
 	resetButton.pressed.connect(reset);
 	undoButton.pressed.connect(undo);
-	#check_win();
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -117,18 +116,19 @@ func exchange_clicked(button: Button):
 		_connect_neighbors();
 
 func exchange_scrambled():
-	var neighbors:= boardGrid.find_board_neighbors(currentHistory) as Array;
-	var neighborsSize = neighbors.size();
+	var neighbors: Array;
 	var index: int;
 	var repeatedMove: bool;
-	for n in neighbors:
-		(n as Button).pressed.disconnect(exchange_clicked);
-	for loop in range(0, 3): #	TODO scramble counter as upper range
-		index = randi()%neighborsSize;
-		neighbors[index]
+	#for n in neighbors:
+	#	(n as Button).pressed.disconnect(exchange_clicked);
+	for loop in range(6): #	TODO scramble counter as upper range
+		neighbors = boardGrid.find_board_neighbors(currentHistory);
+		index = randi()%neighbors.size();
+		exchange_clicked(neighbors[index]);		#TODO replace with code that doesn't update history or redraw
 		#boardGrid.slide_on_board
 		#handle_history
 		if history.size()>2:
-			if (!_match_arrays(currentHistory,history[-3])):
+			if (_match_arrays(currentHistory,history[-3])):
 				loop-=2;
-	_connect_neighbors();
+				history= history.slice(0, -2)
+		_connect_neighbors();
