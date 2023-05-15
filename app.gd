@@ -53,20 +53,13 @@ func reset():
 	#winnerLabel.lines_skipped = 1;
 	history= [SOLUTION];
 	boardGrid.set_board(currentHistory);
-	print(currentHistory);
 	#	TODO remove if you can find a way to remove callable inside itself
-	for button in boardGrid.get_children():
-		if(button is Button):
-			(button as Button).pressed.connect(exchange_clicked.bind(button));
-	_connect_neighbors();
-	#for button in boardGrid.find_board_neighbors(currentHistory):
-	#	print(int(button.text));
+	_bind_buttons();
 		
 func handle_history(nextSquares:Array):
 	history.append(nextSquares);
 	print(history);
 	
-
 func undo():
 	print(history.size())
 	if history.size()>1:
@@ -76,7 +69,13 @@ func undo():
 		#history = newHistory;
 		boardGrid.set_board(currentHistory);
 		print(history);
-		_connect_neighbors();
+		_bind_buttons();
+
+func _bind_buttons():
+	for button in boardGrid.get_children():
+		if(button is Button):
+			(button as Button).pressed.connect(exchange_clicked.bind(button));
+	_connect_neighbors();
 
 func _match_arrays(arr1: Array, arr2: Array) -> bool:
 	for i in range(arr1.size()):
