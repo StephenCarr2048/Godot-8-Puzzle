@@ -64,6 +64,7 @@ func reset():
 		
 func handle_history(nextSquares:Array):
 	history.append(nextSquares);
+	print(history);
 	
 
 func undo():
@@ -99,10 +100,10 @@ func _connect_neighbors():
 		#(button as Button).pressed.connect(exchange_clicked.bind(button));		TODO add back if needed
 
 func _exchange_template(index: int) -> Array:
-	var newSquares = SOLUTION.duplicate()
+	var newSquares = currentHistory.duplicate(true);
 	var emptyIndex = boardGrid.emptyIndex;
-	newSquares[index]=SOLUTION[emptyIndex];
-	newSquares[emptyIndex]=SOLUTION[index];
+	newSquares[index]=currentHistory[emptyIndex];
+	newSquares[emptyIndex]=currentHistory[index];
 	return newSquares;
 
 func exchange_clicked(button: Button):
@@ -111,8 +112,8 @@ func exchange_clicked(button: Button):
 		var index = button.get_index();
 		#print(button.pressed.get_connections()[0]["callable"])
 		#button.pressed.disconnect(button.pressed.get_connections()[0]["callable"]);
-		boardGrid.slide_on_board(currentHistory, index);
 		handle_history(_exchange_template(index));
+		boardGrid.slide_on_board(currentHistory, index);
 		check_win();
 		_connect_neighbors();
 
